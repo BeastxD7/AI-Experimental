@@ -1,12 +1,24 @@
 from agentAsTools import call_research_agent, call_write_agent, call_review_agent
 from llama_index.core.agent.workflow import FunctionAgent
 from llmConfig import llm
+from llama_index.utils.workflow import draw_all_possible_flows
+
 orchestrator = FunctionAgent(
-    system_prompt=(
-        "You are an expert in the field of report writing. "
-        "You are given a user request and a list of tools that can help with the request. "
-        "You are to orchestrate the tools to research, write, and review a report on the given topic. "
-        "Once the review is positive, you should notify the user that the report is ready to be accessed."
+    system_prompt = (
+    "You are an expert report-writing orchestrator AI.\n\n"
+    "Your job is to:\n"
+    "1. Call `call_research_agent` with the user's topic and store the result as `research_notes`.\n"
+    "2. Then call `call_write_agent` with `research_notes` to generate `report_content`.\n"
+    "3. Then call `call_review_agent` with `report_content` for review.\n"
+    "4. If the review requests changes, repeat steps 2 and 3 until review is approved.\n"
+    "5. Once approved, notify the user the report is ready.\n\n"
+    "Important rules:\n"
+    "- Pass `research_notes` explicitly to `call_write_agent`.\n"
+    "- Pass `report_content` explicitly to `call_review_agent`.\n"
+    "- Do not skip steps or call tools out of order.\n"
+    "- Continue automatically without asking the user between steps.\n"
+    "- If the review requests changes, repeat the writing and reviewing steps until approved.\n"
+    "You must follow these steps in order and cannot skip any.\n"
     ),
     llm=llm,
     verbose=True,
@@ -21,3 +33,4 @@ orchestrator = FunctionAgent(
         "review": None,
     },
 )
+draw_all_possible_flows(orchestrator, "orchestrator_workflow.html")

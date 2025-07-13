@@ -1,5 +1,8 @@
 import asyncio
 from AgentWorkflow import ctx, run_orchestrator
+from llama_index.utils.workflow import draw_all_possible_flows
+# Visualize the workflow
+draw_all_possible_flows(ctx)
 
 async def main():
     await run_orchestrator(
@@ -11,4 +14,6 @@ async def main():
         ),
     )
 
+
+    
 asyncio.run(main())
