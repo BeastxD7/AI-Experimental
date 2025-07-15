@@ -6,7 +6,7 @@ from agents import research_agent, write_agent, review_agent
 async def call_research_agent(ctx: Context, prompt: str) -> str:
     """Useful for recording research notes based on a specific prompt."""
     result = await research_agent.run(
-        user_msg=f"Write some notes about the following: {prompt}"
+        user_msg=f"Research some notes about the following: {prompt}"
     )
 
     state = await ctx.store.get("state")
