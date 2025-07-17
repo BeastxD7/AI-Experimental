@@ -47,7 +47,7 @@ workflow = AgentWorkflow(
 
 # Run the multi-agent calculator (async)
 async def main():
-    response = await workflow.run(user_msg="What is 10 + 5? Then subtract 3.")
+    response = await workflow.run(user_msg="What is 10 - 5? Then add 3.")
     print(response)
 
 if __name__ == "__main__":
