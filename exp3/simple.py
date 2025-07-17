@@ -9,7 +9,7 @@ llm = Ollama(model="llama3.1:8b", request_timeout=120.0, context_window=8000)
 # 1. WEATHER TOOL
 def get_weather(city: str) -> str:
 
-    print(f"Fetching weather for {city}...")
+    print(f"Fetching weather for {city} using the GetWeather tool...")
     sample_weather = {
         "Udupi": "light rain with overcast skies, temperature around 28°C",
         "India": "hot and dry with temperature 32°C",
@@ -26,15 +26,23 @@ weather_tool = FunctionTool.from_defaults(
 
 # 2. CALCULATOR TOOLS
 def add(n1: float, n2: float) -> float:
+    """Add two numbers."""
+    print(f"Adding {n1} and {n2} using the Add tool...")
     return n1 + n2
 
 def subtract(n1: float, n2: float) -> float:
+    """Subtract two numbers."""
+    print(f"Subtracting {n1} from {n2} using the Subtract tool...")
     return n1 - n2
 
 def multiply(n1: float, n2: float) -> float:
+    """Multiply two numbers."""
+    print(f"Multiplying {n1} and {n2} using the Multiply tool...")
     return n1 * n2
 
 def divide(n1: float, n2: float) -> float:
+    """Divide two numbers."""
+    print(f"Dividing {n1} by {n2} using the Divide tool...")
     if n2 == 0:
         return "Division by zero error."
     return n1 / n2
@@ -89,7 +97,7 @@ agent_workflow = AgentWorkflow(
 )
 
 async def main():
-    print("Welcome to the multi-agent system (Weather + Calculator) using Llama3.2 local Ollama model.")
+    print("Welcome to the multi-agent system (Weather + Calculator) using local Ollama model.")
     user_prompt = input("Enter your query: ")
     response = await agent_workflow.run(user_msg=user_prompt)
     print("\nResponse:", response)
