@@ -119,8 +119,8 @@ DateTimeAgent = FunctionAgent(
 # 4. WORKFLOW ORCHESTRATOR
 
 workflow = AgentWorkflow(
-    agents=[BhagyaLakshmi, Tirumalesh],
-    root_agent="BhagyaLakshmi",  # Start with Calculator agent, can be changed as needed
+    agents=[CalculatorAgent, DateTimeAgent],
+    root_agent="CalculatorAgent",  # Start with Calculator agent, can be changed as needed
     verbose=True
 )
 
