@@ -4,7 +4,7 @@ from llama_index.core.agent.workflow import FunctionAgent, AgentWorkflow
 from llama_index.llms.ollama import Ollama
 
 # Connect to local Ollama 
-llm = Ollama(model="llama3.1:8b", request_timeout=120.0, context_window=8000)
+llm = Ollama(model="llama3.1:8b", request_timeout=120.0, context_window=8000,is_function_calling_model=True)
 
 # 1. WEATHER TOOL
 def get_weather(city: str) -> str:
@@ -97,7 +97,7 @@ agent_workflow = AgentWorkflow(
 )
 
 async def main():
-    print("Welcome to the multi-agent system (Weather + Calculator) using local Ollama model.")
+    print("Welcome to the multi-agent system (Weather + Calculator) using Llama3.2 local Ollama model.")
     user_prompt = input("Enter your query: ")
     response = await agent_workflow.run(user_msg=user_prompt)
     print("\nResponse:", response)
