@@ -22,12 +22,9 @@ os.environ["OPIK_API_KEY"] = API_KEY
 os.environ["OPIK_WORKSPACE"] = "anonymous-engineer"
 
 # Connect to local Ollama
-llm = Ollama(model="llama3.1:8b", request_timeout=120.0, context_window=8000,is_function_calling_model=True)
+llm = Ollama(model="qwen3:14b", request_timeout=120.0, context_window=8000,is_function_calling_model=True)
 
-# llm= Groq(
-#             model="llama3-70b-8192",  # or "llama3-70b-8192", "gemma-7b-it", etc.
-#             temperature=0.2,
-#         )
+# llm= Groq(model="qwen/qwen3-32b",temperature=0.2)
 
 
 set_global_handler("opik")
